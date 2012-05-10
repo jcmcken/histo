@@ -7,17 +7,9 @@ def parse_key_expr(expr):
 def parse_key_expr_item(item):
     if ':' in item:
         parse = parse_rangelike
-        slice_up = slice_range
     else:
         parse = parse_intlike
-        slice_up = lambda x: x
-    return slice_up(parse(item))
-
-def slice_int(val):
-    return (val, val + 1)
-
-def slice_range(items):
-    return slice(items[0], items[1] + 1)
+    return slice(*parse(item))
 
 def parse_rangelike(item):
     items = item.split(':')
