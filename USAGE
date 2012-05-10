@@ -1,0 +1,35 @@
+-x/--x-keys [expr]
+
+Key expression representing the independent variable in the input data
+
+-y/--y-keys [expr]
+
+Key expression representing the dependent variable in the input data
+
+-d/--delimiter [char]
+
+The character(s) to use to delimit key columns in the input data. This can be a regular expression (defaults to whitespace, e.g. '\s*').
+
+-t/--time-format [format]
+
+If set, the independent variable is assumed to be a date/timestamp, and will be parsed using the datetime formatting of [format].
+
+-p/--profile [profile_name]
+
+Use the profile [profile_name] defined in either ~/.histo.cfg or /etc/histo.cfg. Histo profiles are defined as sections in an *.ini format, e.g.:
+
+[apache_ipaddrs]
+x-keys=4,7,8
+y-keys=3
+time-format=%b %d %H:%M:%S
+delimiter=-
+
+You would then simply run:
+
+cat data | histo -p apache_ipaddrs
+
+If a 'command' option is defined, you can also run just:
+
+histo -p apache_ipaddrs
+
+In this case, 'command' will be run using your current shell and will be read as a data source automatically.
